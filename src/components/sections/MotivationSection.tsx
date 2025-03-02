@@ -82,7 +82,7 @@ const MotivationSection = () => {
           {cards.map((card, idx) => (
             <AnimatedCard
               key={idx}
-              animation={activeCard === idx ? "fade-in-up" : ""}
+              animation={activeCard === idx ? "fade-in-up" : "fade-in"}
               className={cn(
                 "absolute inset-0 transition-all duration-500 flex flex-col lg:flex-row items-center gap-8 p-8 rounded-2xl",
                 activeCard === idx ? "opacity-100 z-10 transform-none" : "opacity-0 z-0 scale-95 pointer-events-none"
