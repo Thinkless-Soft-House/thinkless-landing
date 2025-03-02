@@ -1,23 +1,38 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, Info, Briefcase, MessageSquare, Mail } from "lucide-react";
 
 const navLinks = [
-  { name: "Home", href: "#hero" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Testimonials", href: "#testimonials" },
-  { name: "Contact", href: "#contact" },
+  { name: "Início", href: "#hero", icon: <Home className="h-4 w-4" /> },
+  { name: "Sobre", href: "#about", icon: <Info className="h-4 w-4" /> },
+  { name: "Serviços", href: "#services", icon: <Briefcase className="h-4 w-4" /> },
+  { name: "Depoimentos", href: "#testimonials", icon: <MessageSquare className="h-4 w-4" /> },
+  { name: "Contato", href: "#contact", icon: <Mail className="h-4 w-4" /> },
 ];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("#hero");
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+      
+      // Update active link based on scroll position
+      const sections = document.querySelectorAll("section[id]");
+      const scrollPosition = window.scrollY + 100;
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        const sectionTop = section.offsetTop;
+        
+        if (scrollPosition >= sectionTop) {
+          setActiveLink(`#${section.id}`);
+          break;
+        }
+      }
     };
     
     window.addEventListener("scroll", handleScroll);
@@ -38,9 +53,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
         <a href="#hero" className="relative z-50">
           <div className="flex items-center space-x-2">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-thinkless-blue to-thinkless-blue-light">
-              Thinkless
-            </span>
+            <img 
+              src="/lovable-uploads/c35fd64b-39d6-4a44-9f86-27f63a52854a.png" 
+              alt="Thinkless Logo" 
+              className="h-10 w-auto"
+            />
           </div>
         </a>
 
@@ -51,21 +68,36 @@ const Navbar = () => {
               key={link.name}
               href={link.href}
               className={cn(
-                "font-medium transition-colors duration-200 hover:text-thinkless-blue relative inline-block",
+                "font-medium transition-all duration-200 flex items-center space-x-2 py-2 px-3 rounded-md group",
                 isScrolled ? "text-foreground" : "text-foreground/90",
-                "after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-thinkless-blue after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
+                activeLink === link.href 
+                  ? "text-thinkless-blue" 
+                  : "hover:text-thinkless-blue hover:bg-blue-50/50"
               )}
             >
-              {link.name}
+              <span className={cn(
+                "transition-transform duration-300 transform group-hover:scale-110",
+                activeLink === link.href ? "text-thinkless-blue" : ""
+              )}>
+                {link.icon}
+              </span>
+              <span className={cn(
+                "relative inline-block",
+                activeLink === link.href 
+                  ? "after:content-[''] after:absolute after:w-full after:h-0.5 after:bottom-0 after:left-0 after:bg-thinkless-blue"
+                  : "after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-thinkless-blue after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left"
+              )}>
+                {link.name}
+              </span>
             </a>
           ))}
         </nav>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden relative z-50 text-foreground"
+          className="md:hidden relative z-50 text-foreground p-2 rounded-md hover:bg-gray-100 transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
           {mobileMenuOpen ? (
             <X className="h-6 w-6" />
@@ -86,10 +118,11 @@ const Navbar = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-2xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200"
+                className="flex items-center space-x-3 text-2xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                {link.name}
+                <span className="text-thinkless-blue">{link.icon}</span>
+                <span>{link.name}</span>
               </a>
             ))}
           </div>

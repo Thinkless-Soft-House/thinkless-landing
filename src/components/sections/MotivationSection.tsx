@@ -65,9 +65,9 @@ const MotivationSection = () => {
                 key={idx}
                 onClick={() => setActiveCard(idx)}
                 className={cn(
-                  "px-6 py-2 rounded-full transition-all duration-300",
+                  "px-6 py-2 rounded-full transition-all duration-300 font-medium",
                   activeCard === idx 
-                    ? cn("text-white shadow-lg", card.color.replace("from-", "bg-").split(" ")[0]) 
+                    ? "text-white shadow-lg bg-thinkless-blue" 
                     : "text-gray-500 hover:bg-gray-200"
                 )}
               >

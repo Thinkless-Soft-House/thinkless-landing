@@ -45,21 +45,29 @@ const timelineSteps = [
 
 const TimelineSection = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [hoverStep, setHoverStep] = useState<number | null>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
+  // Handle scroll to show the detail card
   useEffect(() => {
     const handleScroll = () => {
-      // Update active timeline step based on scroll position
       if (timelineRef.current) {
-        const { top, height } = timelineRef.current.getBoundingClientRect();
+        const { top } = timelineRef.current.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         
-        if (top < viewportHeight && top + height > 0) {
-          const progress = Math.max(0, Math.min(1, 1 - (top / viewportHeight)));
+        // Show first item when section becomes visible at all
+        if (top < viewportHeight * 0.9) {
+          // Calculate progress based on how far the section is into the viewport
+          const progress = Math.min(1, 
+            (viewportHeight - top) / (viewportHeight * 0.7)
+          );
+          
+          // Map progress to step index, ensuring first items are visible early
           const stepIndex = Math.min(
             timelineSteps.length - 1,
             Math.floor(progress * timelineSteps.length)
           );
+          
           setCurrentStep(stepIndex);
         }
       }
@@ -100,18 +108,20 @@ const TimelineSection = () => {
                   key={index} 
                   className={cn(
                     "flex gap-8 mb-16 transition-all duration-500",
-                    index > currentStep ? "opacity-40" : "opacity-100"
+                    "opacity-100" // Show all steps by default
                   )}
+                  onMouseEnter={() => setHoverStep(index)}
+                  onMouseLeave={() => setHoverStep(null)}
                 >
                   <div className="relative z-10">
                     <div 
                       className={cn(
-                        "w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg",
-                        index === currentStep 
+                        "w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg cursor-pointer",
+                        (index === currentStep || index === hoverStep) 
                           ? `bg-gradient-to-br ${step.bgColor} text-white scale-110 rotate-6` 
                           : index < currentStep 
                             ? `bg-gradient-to-br ${step.bgColor} text-white opacity-80 rotate-0`
-                            : "bg-white text-gray-300 shadow-sm"
+                            : "bg-white text-gray-300 shadow-sm hover:bg-gray-50"
                       )}
                     >
                       {step.icon}
@@ -122,14 +132,14 @@ const TimelineSection = () => {
                     <h3 
                       className={cn(
                         "text-xl font-bold mb-3 transition-all duration-500",
-                        index === currentStep ? step.textColor : "text-foreground"
+                        (index === currentStep || index === hoverStep) ? step.textColor : "text-foreground"
                       )}
                     >
                       {step.title}
                     </h3>
                     <p className="text-muted-foreground text-base leading-relaxed">{step.description}</p>
                     
-                    {index === currentStep && (
+                    {(index === currentStep || index === hoverStep) && (
                       <div className="w-12 h-1 mt-4 bg-gradient-to-r rounded-full from-transparent via-purple-500 to-transparent"></div>
                     )}
                   </div>
@@ -146,7 +156,7 @@ const TimelineSection = () => {
                   key={index}
                   className={cn(
                     "absolute transition-all duration-1000 inset-0 flex items-center justify-center",
-                    currentStep === index ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
+                    (currentStep === index || hoverStep === index) ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
                   )}
                 >
                   <div className="relative w-full max-w-sm mx-auto">

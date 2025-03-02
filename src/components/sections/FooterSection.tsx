@@ -7,9 +7,13 @@ const FooterSection = () => {
       <div className="max-w-7xl mx-auto px-6 md:px-10">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-8 md:mb-0">
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-thinkless-blue to-thinkless-blue-light">
-              Thinkless
-            </span>
+            <div className="flex items-center">
+              <img 
+                src="/lovable-uploads/c35fd64b-39d6-4a44-9f86-27f63a52854a.png" 
+                alt="Thinkless Logo" 
+                className="h-8 w-auto"
+              />
+            </div>
             <p className="mt-2 text-sm text-muted-foreground">
               Soluções tecnológicas que transformam o seu negócio
             </p>
