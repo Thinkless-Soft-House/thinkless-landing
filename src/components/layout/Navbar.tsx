@@ -42,6 +42,17 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleNavLinkClick = (href: string) => {
+    setActiveLink(href);
+    setMobileMenuOpen(false);
+    
+    // Ensure smooth scrolling to the section
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <header
       className={cn(
@@ -68,6 +79,10 @@ const Navbar = () => {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavLinkClick(link.href);
+              }}
               className={cn(
                 "font-medium transition-all duration-200 flex items-center space-x-2 py-2 px-3 rounded-md group",
                 isScrolled ? "text-foreground" : "text-foreground/90",
@@ -120,7 +135,10 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 className="flex items-center space-x-3 text-2xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavLinkClick(link.href);
+                }}
               >
                 <span className="text-thinkless-blue">{link.icon}</span>
                 <span>{link.name}</span>

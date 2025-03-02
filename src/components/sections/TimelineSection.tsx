@@ -1,5 +1,5 @@
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import AnimatedText from "@/components/ui/AnimatedText";
 import { MessageCircle, MousePointer, Calendar, Navigation, Video } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -44,40 +44,8 @@ const timelineSteps = [
 ];
 
 const TimelineSection = () => {
-  const [currentStep, setCurrentStep] = useState(0);
-  const [hoverStep, setHoverStep] = useState<number | null>(null);
+  const [hoverStep, setHoverStep] = useState<number | null>(0); // Default to showing first step
   const timelineRef = useRef<HTMLDivElement>(null);
-
-  // Handle scroll to show the detail card
-  useEffect(() => {
-    const handleScroll = () => {
-      if (timelineRef.current) {
-        const { top } = timelineRef.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        
-        // Show first item when section becomes visible at all
-        if (top < viewportHeight * 0.9) {
-          // Calculate progress based on how far the section is into the viewport
-          const progress = Math.min(1, 
-            (viewportHeight - top) / (viewportHeight * 0.7)
-          );
-          
-          // Map progress to step index, ensuring first items are visible early
-          const stepIndex = Math.min(
-            timelineSteps.length - 1,
-            Math.floor(progress * timelineSteps.length)
-          );
-          
-          setCurrentStep(stepIndex);
-        }
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initialize on mount
-    
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <section id="nossa-timeline" ref={timelineRef} className="min-h-screen py-24 bg-gradient-to-b from-white to-gray-50 relative">
@@ -111,18 +79,16 @@ const TimelineSection = () => {
                     "opacity-100" // Show all steps by default
                   )}
                   onMouseEnter={() => setHoverStep(index)}
-                  onMouseLeave={() => setHoverStep(null)}
                 >
                   <div className="relative z-10">
                     <div 
                       className={cn(
                         "w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-lg cursor-pointer",
-                        (index === currentStep || index === hoverStep) 
+                        index === hoverStep 
                           ? `bg-gradient-to-br ${step.bgColor} text-white scale-110 rotate-6` 
-                          : index < currentStep 
-                            ? `bg-gradient-to-br ${step.bgColor} text-white opacity-80 rotate-0`
-                            : "bg-white text-gray-300 shadow-sm hover:bg-gray-50"
+                          : "bg-white text-gray-300 shadow-sm hover:bg-gray-50"
                       )}
+                      onClick={() => setHoverStep(index)}
                     >
                       {step.icon}
                     </div>
@@ -132,14 +98,14 @@ const TimelineSection = () => {
                     <h3 
                       className={cn(
                         "text-xl font-bold mb-3 transition-all duration-500",
-                        (index === currentStep || index === hoverStep) ? step.textColor : "text-foreground"
+                        index === hoverStep ? step.textColor : "text-foreground"
                       )}
                     >
                       {step.title}
                     </h3>
                     <p className="text-muted-foreground text-base leading-relaxed">{step.description}</p>
                     
-                    {(index === currentStep || index === hoverStep) && (
+                    {index === hoverStep && (
                       <div className="w-12 h-1 mt-4 bg-gradient-to-r rounded-full from-transparent via-purple-500 to-transparent"></div>
                     )}
                   </div>
@@ -156,7 +122,7 @@ const TimelineSection = () => {
                   key={index}
                   className={cn(
                     "absolute transition-all duration-1000 inset-0 flex items-center justify-center",
-                    (currentStep === index || hoverStep === index) ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
+                    hoverStep === index ? "opacity-100 scale-100" : "opacity-0 scale-90 pointer-events-none"
                   )}
                 >
                   <div className="relative w-full max-w-sm mx-auto">

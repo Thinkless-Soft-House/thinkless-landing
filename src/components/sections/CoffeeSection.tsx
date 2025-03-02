@@ -11,7 +11,7 @@ const CoffeeSection = () => {
   const contactCards = [
     {
       title: "Café Presencial",
-      description: "Vamos marcar um encontro em nosso escritório ou em um café de sua preferência.",
+      description: "Vamos marcar um encontro em um café ou restaurante de sua preferência para discutir seu projeto.",
       icon: Coffee,
       iconColor: "text-thinkless-blue",
       bgColor: "bg-thinkless-blue/10",
@@ -22,7 +22,7 @@ const CoffeeSection = () => {
     },
     {
       title: "Café Virtual",
-      description: "Prefere uma reunião online? Vamos marcar uma videochamada rápida.",
+      description: "Agendamos uma reunião online por videochamada ou WhatsApp para conhecer melhor sua ideia.",
       icon: Video,
       iconColor: "text-thinkless-orange",
       bgColor: "bg-thinkless-orange/10",
@@ -33,7 +33,7 @@ const CoffeeSection = () => {
     },
     {
       title: "Chat Rápido",
-      description: "Tem uma dúvida rápida? Podemos conversar por WhatsApp.",
+      description: "Tem uma dúvida rápida? Podemos conversar por WhatsApp sem compromisso.",
       icon: MessageCircle,
       iconColor: "text-thinkless-red",
       bgColor: "bg-thinkless-red/10",
