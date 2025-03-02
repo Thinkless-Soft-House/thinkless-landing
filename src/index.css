@@ -100,6 +100,98 @@
   }
 }
 
+/* Floating icon animations for HeroSection */
+@keyframes floating-circle-1 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(20px, 15px) rotate(5deg); }
+  50% { transform: translate(0, 30px) rotate(0deg); }
+  75% { transform: translate(-20px, 15px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floating-circle-2 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-15px, -20px) rotate(-5deg); }
+  50% { transform: translate(-30px, 0) rotate(0deg); }
+  75% { transform: translate(-15px, 20px) rotate(5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floating-circle-3 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(25px, 10px) rotate(10deg); }
+  66% { transform: translate(-10px, 25px) rotate(-5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floating-circle-4 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-25px, -10px) rotate(-10deg); }
+  66% { transform: translate(10px, -25px) rotate(5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floating-circle-5 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(10px, -30px) rotate(5deg); }
+  50% { transform: translate(30px, 0) rotate(10deg); }
+  75% { transform: translate(10px, 30px) rotate(5deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes floating-circle-6 {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-15px, 10px) rotate(-10deg); }
+  40% { transform: translate(-30px, -15px) rotate(-20deg); }
+  60% { transform: translate(-10px, -30px) rotate(-10deg); }
+  80% { transform: translate(15px, -10px) rotate(0deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+.floating-circle-1 {
+  animation: floating-circle-1 15s ease-in-out infinite;
+}
+
+.floating-circle-2 {
+  animation: floating-circle-2 18s ease-in-out infinite;
+}
+
+.floating-circle-3 {
+  animation: floating-circle-3 20s ease-in-out infinite;
+}
+
+.floating-circle-4 {
+  animation: floating-circle-4 17s ease-in-out infinite;
+}
+
+.floating-circle-5 {
+  animation: floating-circle-5 22s ease-in-out infinite;
+}
+
+.floating-circle-6 {
+  animation: floating-circle-6 12s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0% { opacity: 0.5; transform: scale(0.95); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(0.95); }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 6s ease-in-out infinite;
+}
+
 /* Smooth scroll for element anchor links */
 html {
   scroll-behavior: smooth;

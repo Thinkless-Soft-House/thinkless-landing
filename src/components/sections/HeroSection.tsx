@@ -1,7 +1,7 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import AnimatedText from "@/components/ui/AnimatedText";
-import { ArrowRight, Coffee } from "lucide-react";
+import { ArrowRight, Coffee, Star, Code, Lightbulb, Sparkles, Zap, Brain } from "lucide-react";
 
 interface HeroSectionProps {
   scrollPosition: number;
@@ -11,6 +11,58 @@ const HeroSection = ({ scrollPosition }: HeroSectionProps) => {
   const parallaxStyle = {
     transform: `translateY(${scrollPosition * 0.2}px)`,
   };
+
+  // Floating icons around the logo
+  const floatingIcons = useMemo(() => [
+    { 
+      Icon: Code, 
+      color: "text-thinkless-blue", 
+      size: 20, 
+      animationDuration: '15s',
+      initialPosition: { top: '25%', left: '42%' },
+      animationPath: 'floating-circle-1'
+    },
+    { 
+      Icon: Lightbulb, 
+      color: "text-thinkless-orange", 
+      size: 24, 
+      animationDuration: '18s',
+      initialPosition: { top: '60%', left: '48%' },
+      animationPath: 'floating-circle-2'
+    },
+    { 
+      Icon: Sparkles, 
+      color: "text-thinkless-red", 
+      size: 18, 
+      animationDuration: '20s',
+      initialPosition: { top: '40%', left: '75%' },
+      animationPath: 'floating-circle-3'
+    },
+    { 
+      Icon: Zap, 
+      color: "text-thinkless-blue-dark", 
+      size: 22, 
+      animationDuration: '17s',
+      initialPosition: { top: '30%', left: '65%' },
+      animationPath: 'floating-circle-4'
+    },
+    { 
+      Icon: Brain, 
+      color: "text-thinkless-orange-dark", 
+      size: 26, 
+      animationDuration: '22s',
+      initialPosition: { top: '65%', left: '70%' },
+      animationPath: 'floating-circle-5'
+    },
+    { 
+      Icon: Star, 
+      color: "text-thinkless-blue-light", 
+      size: 16, 
+      animationDuration: '12s',
+      initialPosition: { top: '20%', left: '55%' },
+      animationPath: 'floating-circle-6'
+    },
+  ], []);
 
   return (
     <section className="min-h-screen relative flex flex-col lg:flex-row items-center overflow-hidden pt-20">
@@ -90,12 +142,30 @@ const HeroSection = ({ scrollPosition }: HeroSectionProps) => {
         </div>
       </div>
       
-      {/* Hero Animated Visual */}
+      {/* Hero Animated Visual with floating icons */}
       <div 
         className="w-full lg:w-1/2 h-full flex items-center justify-center z-10 p-8 lg:p-16"
         style={parallaxStyle}
       >
         <div className="relative w-full max-w-lg aspect-square">
+          {/* Add the floating icons */}
+          {floatingIcons.map((icon, index) => (
+            <div 
+              key={index}
+              className={`absolute ${icon.animationPath} z-20`}
+              style={{
+                top: icon.initialPosition.top,
+                left: icon.initialPosition.left,
+                animationDuration: icon.animationDuration,
+                animationDelay: `${index * 0.5}s`
+              }}
+            >
+              <div className={`p-2 bg-white rounded-full shadow-md ${icon.animationPath === 'floating-circle-1' ? 'animate-float' : ''}`}>
+                <icon.Icon className={icon.color} size={icon.size} />
+              </div>
+            </div>
+          ))}
+          
           {/* Animated layers */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-3/4 h-3/4 rounded-full bg-gradient-to-br from-thinkless-blue-light to-transparent opacity-20 animate-spin" style={{animationDuration: '30s'}}></div>
@@ -107,8 +177,12 @@ const HeroSection = ({ scrollPosition }: HeroSectionProps) => {
             <div className="w-1/2 h-1/2 rounded-full bg-gradient-to-tr from-thinkless-red to-transparent opacity-20 animate-pulse" style={{animationDuration: '4s'}}></div>
           </div>
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-1/3 h-1/3 rounded-full bg-white shadow-lg flex items-center justify-center text-4xl font-bold text-thinkless-blue animate-float">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-thinkless-blue to-thinkless-blue-light">T</span>
+            <div className="w-1/3 h-1/3 rounded-full bg-white shadow-lg flex items-center justify-center text-4xl font-bold text-thinkless-blue">
+              <img 
+                src="/lovable-uploads/c35fd64b-39d6-4a44-9f86-27f63a52854a.png" 
+                alt="Thinkless Logo" 
+                className="w-full h-full object-contain p-2" 
+              />
             </div>
           </div>
         </div>

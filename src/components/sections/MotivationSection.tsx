@@ -1,19 +1,50 @@
 
 import AnimatedText from "@/components/ui/AnimatedText";
 import AnimatedCard from "@/components/ui/AnimatedCard";
+import { EyeIcon, Sparkles, Verified } from "lucide-react";
+import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 const MotivationSection = () => {
+  const [activeCard, setActiveCard] = useState(0);
+  
+  const cards = [
+    {
+      title: "Visão Clara",
+      description: "Enxergamos além do óbvio para encontrar soluções que realmente transformam a maneira como os negócios funcionam.",
+      icon: <EyeIcon className="h-8 w-8 text-white" />,
+      color: "bg-gradient-to-br from-purple-600 to-indigo-700"
+    },
+    {
+      title: "Excelência",
+      description: "Não nos contentamos com o básico. Buscamos a excelência em cada linha de código e em cada interface que criamos.",
+      icon: <Sparkles className="h-8 w-8 text-white" />,
+      color: "bg-gradient-to-br from-orange-500 to-pink-600"
+    },
+    {
+      title: "Conexão Humana",
+      description: "Por trás de cada código está uma equipe apaixonada por criar soluções que conectam pessoas e transformam experiências.",
+      icon: <Verified className="h-8 w-8 text-white" />,
+      color: "bg-gradient-to-br from-cyan-500 to-blue-600"
+    }
+  ];
+
   return (
-    <section className="min-h-screen py-24 relative">
+    <section className="min-h-screen py-24 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent"></div>
+        
+        {/* Decorative background elements */}
+        <div className="absolute top-1/4 right-10 w-72 h-72 rounded-full bg-purple-500/5"></div>
+        <div className="absolute bottom-1/4 left-10 w-80 h-80 rounded-full bg-blue-500/5"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-orange-500/5"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
         <AnimatedText 
           animation="fade-in" 
-          className="heading-md text-center mb-4 text-thinkless-blue"
+          className="heading-md text-center mb-4 text-purple-600"
         >
           O que nos motiva
         </AnimatedText>
@@ -26,49 +57,62 @@ const MotivationSection = () => {
           Nossa paixão por criar soluções que fazem a diferença
         </AnimatedText>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatedCard animation="fade-in-up" delay={400} className="bg-white p-8 h-full">
-            <div className="w-16 h-16 rounded-full bg-thinkless-blue/10 flex items-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-thinkless-blue">
-                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-3">Visão Clara</h3>
-            <p className="text-muted-foreground">
-              Enxergamos além do óbvio para encontrar soluções que realmente transformam a maneira como os negócios funcionam.
-            </p>
-          </AnimatedCard>
-          
-          <AnimatedCard animation="fade-in-up" delay={600} className="bg-white p-8 h-full">
-            <div className="w-16 h-16 rounded-full bg-thinkless-orange/10 flex items-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-thinkless-orange">
-                <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14Z"></path>
-                <path d="M7 22V7H2.66a2 2 0 0 0-2 2.3l1.38 9A2 2 0 0 0 4.04 20H7Z"></path>
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-3">Excelência</h3>
-            <p className="text-muted-foreground">
-              Não nos contentamos com o básico. Buscamos a excelência em cada linha de código e em cada interface que criamos.
-            </p>
-          </AnimatedCard>
-          
-          <AnimatedCard animation="fade-in-up" delay={800} className="bg-white p-8 h-full">
-            <div className="w-16 h-16 rounded-full bg-thinkless-red/10 flex items-center justify-center mb-6">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-thinkless-red">
-                <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
-                <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
-                <path d="M4 22h16"></path>
-                <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
-                <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
-                <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
-              </svg>
-            </div>
-            <h3 className="text-xl font-bold mb-3">Conexão Humana</h3>
-            <p className="text-muted-foreground">
-              Por trás de cada código está uma equipe apaixonada por criar soluções que conectam pessoas e transformam experiências.
-            </p>
-          </AnimatedCard>
+        {/* Interactive Card Selector */}
+        <div className="flex justify-center mb-12">
+          <div className="flex space-x-2 p-1 bg-gray-100 rounded-full">
+            {cards.map((card, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveCard(idx)}
+                className={cn(
+                  "px-6 py-2 rounded-full transition-all duration-300",
+                  activeCard === idx 
+                    ? cn("text-white shadow-lg", card.color.replace("from-", "bg-").split(" ")[0]) 
+                    : "text-gray-500 hover:bg-gray-200"
+                )}
+              >
+                {card.title}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        {/* Main animated card display */}
+        <div className="relative h-[400px] w-full max-w-4xl mx-auto">
+          {cards.map((card, idx) => (
+            <AnimatedCard
+              key={idx}
+              animation={activeCard === idx ? "fade-in-up" : ""}
+              className={cn(
+                "absolute inset-0 transition-all duration-500 flex flex-col lg:flex-row items-center gap-8 p-8 rounded-2xl",
+                activeCard === idx ? "opacity-100 z-10 transform-none" : "opacity-0 z-0 scale-95 pointer-events-none"
+              )}
+            >
+              <div className={`${card.color} p-8 rounded-2xl shadow-xl w-full lg:w-1/3 aspect-square flex items-center justify-center`}>
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 rounded-xl bg-white/10 animate-pulse"></div>
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    {card.icon}
+                  </div>
+                  
+                  {/* Decorative elements */}
+                  <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-white/20"></div>
+                  <div className="absolute bottom-4 left-4 w-4 h-4 rounded-full bg-white/20"></div>
+                  <div className="absolute top-1/2 left-4 w-3 h-3 rounded-full bg-white/20"></div>
+                </div>
+              </div>
+              
+              <div className="lg:w-2/3">
+                <h3 className="text-3xl font-bold mb-6">{card.title}</h3>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  {card.description}
+                </p>
+                <p className="text-lg leading-relaxed">
+                  Na Thinkless, acreditamos que {idx === 0 ? "a clareza de propósito é fundamental para entregarmos soluções que realmente fazem sentido para seu negócio." : idx === 1 ? "apenas o melhor é suficiente, por isso nos dedicamos a aprimorar constantemente nossas habilidades e processos." : "a tecnologia deve servir às pessoas, e não o contrário. Nosso foco está sempre em criar experiências que conectam e facilitam a vida."}
+                </p>
+              </div>
+            </AnimatedCard>
+          ))}
         </div>
       </div>
     </section>
