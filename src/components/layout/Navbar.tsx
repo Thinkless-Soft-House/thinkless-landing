@@ -26,7 +26,8 @@ const Navbar = () => {
       
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = sections[i];
-        const sectionTop = section.offsetTop;
+        // Cast to HTMLElement to access offsetTop property
+        const sectionTop = (section as HTMLElement).offsetTop;
         
         if (scrollPosition >= sectionTop) {
           setActiveLink(`#${section.id}`);
