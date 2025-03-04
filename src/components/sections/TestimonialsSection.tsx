@@ -4,34 +4,9 @@ import AnimatedText from "@/components/ui/AnimatedText";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+import { testimonials } from "@/data/testimonials";
+
 const TestimonialsSection = () => {
-  const testimonials = [
-    {
-      name: "Carlos Silva",
-      role: "CEO, Logística Express",
-      quote: "A Thinkless transformou nossa operação logística com uma solução que realmente entendeu nosso problema. Não só entregaram no prazo, como superaram nossas expectativas."
-    },
-    {
-      name: "Marina Oliveira",
-      role: "CTO, FinTech Brasil",
-      quote: "Encontramos na Thinkless um parceiro que não só entendeu nossa visão, mas nos ajudou a aprimorá-la. A solução entregue permitiu que escalássemos com segurança e confiança."
-    },
-    {
-      name: "Ricardo Mendes",
-      role: "Diretor, Retail Solutions",
-      quote: "A abordagem personalizada e o comprometimento da equipe Thinkless fizeram toda a diferença. Eles realmente se importam com o sucesso do cliente."
-    },
-    {
-      name: "Fernanda Santos",
-      role: "VP de Operações, TechVision",
-      quote: "A capacidade da Thinkless de transformar requisitos complexos em soluções elegantes e intuitivas é impressionante. Eles entregaram muito além do prometido."
-    },
-    {
-      name: "Paulo Guedes",
-      role: "Diretor de TI, EduTech",
-      quote: "Em 15 anos gerenciando projetos de TI, nunca trabalhei com uma equipe tão competente e comprometida como a da Thinkless. Recomendo com total confiança."
-    }
-  ];
 
   const [currentIdx, setCurrentIdx] = useState(0);
   const [autoplay, setAutoplay] = useState(true);
@@ -44,6 +19,7 @@ const TestimonialsSection = () => {
     }, 5000);
     
     return () => clearInterval(interval);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [testimonials.length, autoplay]);
 
   const handlePrev = () => {
@@ -93,7 +69,7 @@ const TestimonialsSection = () => {
           {/* Testimonials slider */}
           <div className="overflow-hidden">
             <div 
-              className="flex transition-transform duration-500 ease-in-out h-[350px]" 
+              className="flex transition-transform duration-500 ease-in-out h-[550px] md:h-[350px]" 
               style={{ transform: `translateX(-${currentIdx * 100}%)` }}
             >
               {testimonials.map((testimonial, index) => (

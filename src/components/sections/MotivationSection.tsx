@@ -133,7 +133,7 @@ const MotivationSection = () => {
         </div>
         
         {/* Responsive card display */}
-        <div className="relative h-[550px] sm:h-[500px] md:h-[450px] lg:h-[400px] w-full max-w-4xl mx-auto">
+        <div className="relative h-[600px] sm:h-[500px] md:h-[450px] lg:h-[400px] w-full max-w-4xl mx-auto">
           {cards.map((card, idx) => (
             <AnimatedCard
               key={idx}

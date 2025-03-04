@@ -1,4 +1,3 @@
-
 import AnimatedText from "@/components/ui/AnimatedText";
 import AnimatedCard from "@/components/ui/AnimatedCard";
 
@@ -19,14 +18,15 @@ const CasesSection = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-1 p-8">
                 <div className="w-20 h-1 bg-thinkless-blue mb-6"></div>
-                <h3 className="text-2xl font-bold mb-4">Empresa de Logística</h3>
+                <h3 className="text-2xl font-bold mb-4">SaaS de Agendamento</h3>
                 <p className="paragraph mb-6">
-                  Desenvolvemos um sistema completo de gerenciamento de entregas que reduziu em 40% o tempo de processamento de pedidos e aumentou a precisão das entregas em 65%.
+                  Desenvolvemos uma solução completa de agendamento como SaaS que permite aos prestadores de serviços gerenciar suas agendas, clientes e pagamentos em um só lugar. O sistema reduziu o tempo de gestão administrativa em 60% e aumentou a taxa de conversão de clientes em 45%.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
-                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">Sistema Web</span>
-                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">App Mobile</span>
-                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">Integrações API</span>
+                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">SaaS</span>
+                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">Multi-tenant</span>
+                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">Pagamentos</span>
+                  <span className="px-3 py-1 bg-thinkless-blue/10 text-thinkless-blue text-sm rounded-full">Mobile-first</span>
                 </div>
               </div>
               <div className="order-1 lg:order-2">
@@ -34,10 +34,16 @@ const CasesSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-thinkless-blue/20 to-thinkless-orange/20 flex items-center justify-center">
                     <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl">
                       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-thinkless-blue">
-                        <path d="M14 6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z" />
-                        <path d="M22 6a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2z" />
-                        <path d="M14 20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z" />
-                        <path d="M22 20a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2z" />
+                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+                        <line x1="16" x2="16" y1="2" y2="6" />
+                        <line x1="8" x2="8" y1="2" y2="6" />
+                        <line x1="3" x2="21" y1="10" y2="10" />
+                        <path d="M8 14h.01" />
+                        <path d="M12 14h.01" />
+                        <path d="M16 14h.01" />
+                        <path d="M8 18h.01" />
+                        <path d="M12 18h.01" />
+                        <path d="M16 18h.01" />
                       </svg>
                     </div>
                   </div>
@@ -50,14 +56,15 @@ const CasesSection = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div className="order-2 lg:order-2 p-8">
                 <div className="w-20 h-1 bg-thinkless-orange mb-6"></div>
-                <h3 className="text-2xl font-bold mb-4">Fintech Emergente</h3>
+                <h3 className="text-2xl font-bold mb-4">Tay Training - Plataforma de Cursos</h3>
                 <p className="paragraph mb-6">
-                  Criamos uma plataforma segura e intuitiva que permitiu à empresa escalar suas operações em 300% em apenas 6 meses, com zero incidentes de segurança.
+                  Desenvolvemos uma solução complementar para a Tay Training, empresa especializada na venda de cursos de treinamento físico. Nosso aplicativo auxilia as alunas a acessarem corretamente os treinos necessários para seu programa, com vídeos demonstrativos e instruções detalhadas. A integração resultou em um aumento de 75% na retenção das alunas e melhorou significativamente a experiência do cliente final.
                 </p>
                 <div className="flex flex-wrap gap-3 mb-8">
-                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">Desenvolvimento Web</span>
-                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">Segurança</span>
-                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">Dashboard</span>
+                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">App Mobile</span>
+                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">Integração</span>
+                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">E-learning</span>
+                  <span className="px-3 py-1 bg-thinkless-orange/10 text-thinkless-orange text-sm rounded-full">Conteúdo Personalizado</span>
                 </div>
               </div>
               <div className="order-1 lg:order-1">
@@ -65,9 +72,13 @@ const CasesSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-r from-thinkless-orange/20 to-thinkless-red/20 flex items-center justify-center">
                     <div className="w-32 h-32 bg-white rounded-full flex items-center justify-center shadow-xl">
                       <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-thinkless-orange">
-                        <path d="M20.91 8.84 8.56 2.23a1.93 1.93 0 0 0-1.81 0L3.1 4.13a2.12 2.12 0 0 0-.05 3.69l12.22 6.93a2 2 0 0 0 1.94 0L21 12.51a2.12 2.12 0 0 0-.09-3.67Z" />
-                        <path d="m3.09 8.84 12.35-6.61a1.93 1.93 0 0 1 1.81 0l3.65 1.9a2.12 2.12 0 0 1 .1 3.69L8.73 14.75a2 2 0 0 1-1.94 0L3 12.51a2.12 2.12 0 0 1 .09-3.67Z" />
-                        <line x1="12" x2="12" y1="22" y2="13" />
+                        <path d="m6.5 6.5 11 11"></path>
+                        <path d="m21 21-1-1"></path>
+                        <path d="m3 3 1 1"></path>
+                        <path d="m18 22 4-4"></path>
+                        <path d="m2 6 4-4"></path>
+                        <path d="m3 10 7-7"></path>
+                        <path d="m14 21 7-7"></path>
                       </svg>
                     </div>
                   </div>
