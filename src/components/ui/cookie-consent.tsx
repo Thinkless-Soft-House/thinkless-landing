@@ -55,7 +55,7 @@ export const CookieConsent = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto overflow-x-hidden w-[calc(100%-2rem)] mx-auto">
         <DialogHeader>
           <DialogTitle className="text-xl">Política de Cookies</DialogTitle>
           <DialogDescription className="pt-2">
