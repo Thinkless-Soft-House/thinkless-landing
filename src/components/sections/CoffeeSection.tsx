@@ -17,8 +17,8 @@ const CoffeeSection = () => {
       bgColor: "bg-thinkless-blue/10",
       hoverBgColor: "hover:bg-gradient-to-br from-thinkless-blue/20 to-thinkless-blue/5",
       textColor: "text-thinkless-blue",
-      link: "tel:+5511999999999",
-      linkText: "Ligar: (11) 99999-9999"
+      link: "tel:+5531995822494",
+      linkText: "Ligar: (31) 99582-2494"
     },
     {
       title: "Café Virtual",
@@ -39,7 +39,7 @@ const CoffeeSection = () => {
       bgColor: "bg-thinkless-red/10",
       hoverBgColor: "hover:bg-gradient-to-br from-thinkless-red/20 to-thinkless-red/5",
       textColor: "text-thinkless-red",
-      link: "https://wa.me/5511999999999",
+      link: "https://wa.me/5531995822494",
       linkText: "WhatsApp"
     }
   ];
