@@ -43,7 +43,11 @@ const timelineSteps = [
   },
 ];
 
-const TimelineSection = () => {
+interface TimelineSectionProps {
+  isMobile?: boolean;
+}
+
+const TimelineSection = ({ isMobile }: TimelineSectionProps) => {
   const [hoverStep, setHoverStep] = useState<number | null>(0); // Default to showing first step
   const timelineRef = useRef<HTMLDivElement>(null);
 
