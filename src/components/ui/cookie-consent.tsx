@@ -19,6 +19,38 @@ interface CookieConsentProps {
   onReject: () => void;
 }
 
+interface CookieTypeProps {
+  id: keyof CookieSettings;
+  label: string;
+  description: string;
+  checked: boolean;
+  disabled?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
+}
+
+// Componente separado para cada tipo de cookie para melhorar reuso
+const CookieType = ({ id, label, description, checked, disabled = false, onCheckedChange }: CookieTypeProps) => (
+  <div className="flex items-start space-x-3 p-3 border rounded-md">
+    <Checkbox 
+      id={id} 
+      checked={checked} 
+      disabled={disabled}
+      onCheckedChange={(checked) => onCheckedChange?.(checked === true)}
+    />
+    <div>
+      <Label 
+        htmlFor={id} 
+        className="font-medium text-foreground"
+      >
+        {label}
+      </Label>
+      <p className="text-sm text-muted-foreground">
+        {description}
+      </p>
+    </div>
+  </div>
+);
+
 export const CookieConsent = ({ 
   open, 
   onOpenChange, 
@@ -53,6 +85,30 @@ export const CookieConsent = ({
     toast.info("Cookies rejeitados. Algumas funcionalidades podem estar limitadas.");
   };
 
+  const cookieTypes = [
+    {
+      id: "essential" as keyof CookieSettings,
+      label: "Cookies Essenciais",
+      description: "Necessários para o funcionamento básico do site. Não podem ser desativados.",
+      checked: settings.essential,
+      disabled: true
+    },
+    {
+      id: "analytics" as keyof CookieSettings,
+      label: "Cookies Analíticos",
+      description: "Nos ajudam a entender como os visitantes interagem com o site, permitindo melhorar a experiência de navegação.",
+      checked: settings.analytics,
+      onCheckedChange: (checked: boolean) => setSettings({...settings, analytics: checked})
+    },
+    {
+      id: "marketing" as keyof CookieSettings,
+      label: "Cookies de Marketing",
+      description: "Usados para rastrear visitantes em sites. A intenção é exibir anúncios relevantes e envolventes para o usuário.",
+      checked: settings.marketing,
+      onCheckedChange: (checked: boolean) => setSettings({...settings, marketing: checked})
+    }
+  ];
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto overflow-x-hidden w-[calc(100%-2rem)] mx-auto">
@@ -64,72 +120,21 @@ export const CookieConsent = ({
           </DialogDescription>
         </DialogHeader>
         
-        {showDetails ? (
+        {showDetails && (
           <div className="space-y-4 my-4">
-            <div className="flex items-start space-x-3 p-3 border rounded-md">
-              <Checkbox 
-                id="essential" 
-                checked={settings.essential} 
-                disabled={true} 
+            {cookieTypes.map((cookieType) => (
+              <CookieType 
+                key={cookieType.id}
+                id={cookieType.id}
+                label={cookieType.label}
+                description={cookieType.description}
+                checked={cookieType.checked}
+                disabled={cookieType.disabled}
+                onCheckedChange={cookieType.onCheckedChange}
               />
-              <div>
-                <Label 
-                  htmlFor="essential" 
-                  className="font-medium text-foreground"
-                >
-                  Cookies Essenciais
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Necessários para o funcionamento básico do site. Não podem ser desativados.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-3 p-3 border rounded-md">
-              <Checkbox 
-                id="analytics" 
-                checked={settings.analytics}
-                onCheckedChange={(checked) => 
-                  setSettings({...settings, analytics: checked === true})
-                }
-              />
-              <div>
-                <Label 
-                  htmlFor="analytics" 
-                  className="font-medium text-foreground"
-                >
-                  Cookies Analíticos
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Nos ajudam a entender como os visitantes interagem com o site, 
-                  permitindo melhorar a experiência de navegação.
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex items-start space-x-3 p-3 border rounded-md">
-              <Checkbox 
-                id="marketing" 
-                checked={settings.marketing}
-                onCheckedChange={(checked) => 
-                  setSettings({...settings, marketing: checked === true})
-                }
-              />
-              <div>
-                <Label 
-                  htmlFor="marketing" 
-                  className="font-medium text-foreground"
-                >
-                  Cookies de Marketing
-                </Label>
-                <p className="text-sm text-muted-foreground">
-                  Usados para rastrear visitantes em sites. A intenção é exibir 
-                  anúncios relevantes e envolventes para o usuário.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
-        ) : null}
+        )}
         
         <div className="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-2 pt-2">
           <Button

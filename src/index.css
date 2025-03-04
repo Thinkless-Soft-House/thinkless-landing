@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
@@ -59,6 +60,15 @@
     -webkit-font-smoothing: antialiased;
     margin: 0;
     padding: 0;
+  }
+  
+  #root {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden;
   }
 }
 
@@ -198,11 +208,6 @@
 
 .animate-pulse-slow {
   animation: pulse-slow 6s ease-in-out infinite;
-}
-
-/* Smooth scroll for element anchor links */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Override for users who prefer reduced motion */
