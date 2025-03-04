@@ -9,10 +9,20 @@ import CasesSection from "@/components/sections/CasesSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CoffeeSection from "@/components/sections/CoffeeSection";
 import FooterSection from "@/components/sections/FooterSection";
+import { CookieConsent } from "@/components/ui/cookie-consent";
+import { useCookieConsent } from "@/hooks/use-cookie-consent";
+import { CookieSettingsButton } from "@/components/ui/cookie-settings-button";
 
 const Index = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const { 
+    showConsentDialog, 
+    setShowConsentDialog, 
+    acceptCookies, 
+    rejectCookies,
+    reopenConsentDialog
+  } = useCookieConsent();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -57,6 +67,15 @@ const Index = () => {
       <TestimonialsSection />
       <CoffeeSection />
       <FooterSection />
+      
+      <CookieConsent
+        open={showConsentDialog}
+        onOpenChange={setShowConsentDialog}
+        onAccept={acceptCookies}
+        onReject={rejectCookies}
+      />
+      
+      <CookieSettingsButton onClick={reopenConsentDialog} />
     </div>
   );
 };
