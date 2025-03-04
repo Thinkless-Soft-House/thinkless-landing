@@ -30,9 +30,19 @@ const Index = () => {
     handleScroll();
     handleResize();
     
+    // This fixes a common mobile Safari issue where the vh unit is calculated incorrectly
+    const setViewportHeight = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    };
+    
+    setViewportHeight();
+    window.addEventListener('resize', setViewportHeight);
+    
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', setViewportHeight);
     };
   }, []);
 
@@ -41,7 +51,7 @@ const Index = () => {
       <Navbar />
       <HeroSection scrollPosition={scrollPosition} />
       <MotivationSection />
-      <TimelineSection />
+      <TimelineSection isMobile={isMobile} />
       <SolutionsSection />
       <CasesSection />
       <TestimonialsSection />

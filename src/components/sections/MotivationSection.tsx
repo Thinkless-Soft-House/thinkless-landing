@@ -30,7 +30,7 @@ const MotivationSection = () => {
   ];
 
   return (
-    <section className="min-h-screen py-16 md:py-24 relative overflow-hidden">
+    <section id="about" className="min-h-screen py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent"></div>
@@ -57,18 +57,18 @@ const MotivationSection = () => {
           Nossa paixão por criar soluções que fazem a diferença
         </AnimatedText>
         
-        {/* Interactive Card Selector - Mobile Optimized */}
-        <div className="flex justify-center mb-8 md:mb-12 px-2">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:flex-nowrap sm:space-x-2 p-1 bg-gray-100 rounded-full">
+        {/* Mobile-optimized Card Selector */}
+        <div className="flex justify-center mb-8 md:mb-12">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:flex-nowrap sm:space-x-2 p-1.5 bg-gray-100 rounded-full">
             {cards.map((card, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveCard(idx)}
                 className={cn(
-                  "px-3 sm:px-4 md:px-6 py-2 rounded-full transition-all duration-300 font-medium text-sm sm:text-base",
+                  "px-3 py-2 text-sm rounded-full font-medium whitespace-nowrap transition-all duration-300",
                   activeCard === idx 
-                    ? "bg-thinkless-blue text-white shadow-lg" 
-                    : "text-gray-500 hover:bg-gray-200"
+                    ? "bg-thinkless-blue text-white shadow-md" 
+                    : "text-gray-600 hover:bg-gray-200"
                 )}
               >
                 {card.title}
@@ -77,39 +77,41 @@ const MotivationSection = () => {
           </div>
         </div>
         
-        {/* Main animated card display */}
-        <div className="relative h-[500px] sm:h-[450px] md:h-[400px] w-full max-w-4xl mx-auto">
+        {/* Responsive card display */}
+        <div className="relative h-[550px] sm:h-[500px] md:h-[450px] lg:h-[400px] w-full max-w-4xl mx-auto">
           {cards.map((card, idx) => (
             <AnimatedCard
               key={idx}
               animation={activeCard === idx ? "fade-in-up" : "fade-in"}
               className={cn(
-                "absolute inset-0 transition-all duration-500 flex flex-col lg:flex-row items-center gap-4 md:gap-8 p-4 md:p-8 rounded-2xl",
+                "absolute inset-0 transition-all duration-500",
                 activeCard === idx ? "opacity-100 z-10 transform-none" : "opacity-0 z-0 scale-95 pointer-events-none"
               )}
             >
-              <div className={`${card.color} p-6 md:p-8 rounded-2xl shadow-xl w-full lg:w-1/3 aspect-square flex items-center justify-center`}>
-                <div className="relative w-full h-full">
-                  <div className="absolute inset-0 rounded-xl bg-white/10 animate-pulse"></div>
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    {card.icon}
+              <div className="h-full w-full flex flex-col lg:flex-row items-center gap-4 md:gap-8 p-4 md:p-8 rounded-2xl overflow-hidden">
+                <div className={`${card.color} p-6 md:p-8 rounded-2xl shadow-xl w-full max-w-xs mx-auto lg:w-1/3 aspect-square flex items-center justify-center`}>
+                  <div className="relative w-full h-full">
+                    <div className="absolute inset-0 rounded-xl bg-white/10 animate-pulse"></div>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                      {card.icon}
+                    </div>
+                    
+                    {/* Decorative elements */}
+                    <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-white/20"></div>
+                    <div className="absolute bottom-4 left-4 w-4 h-4 rounded-full bg-white/20"></div>
+                    <div className="absolute top-1/2 left-4 w-3 h-3 rounded-full bg-white/20"></div>
                   </div>
-                  
-                  {/* Decorative elements */}
-                  <div className="absolute top-4 right-4 w-6 h-6 rounded-full bg-white/20"></div>
-                  <div className="absolute bottom-4 left-4 w-4 h-4 rounded-full bg-white/20"></div>
-                  <div className="absolute top-1/2 left-4 w-3 h-3 rounded-full bg-white/20"></div>
                 </div>
-              </div>
-              
-              <div className="lg:w-2/3">
-                <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6">{card.title}</h3>
-                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
-                  {card.description}
-                </p>
-                <p className="text-base md:text-lg leading-relaxed">
-                  Na Thinkless, acreditamos que {idx === 0 ? "a clareza de propósito é fundamental para entregarmos soluções que realmente fazem sentido para seu negócio." : idx === 1 ? "apenas o melhor é suficiente, por isso nos dedicamos a aprimorar constantemente nossas habilidades e processos." : "a tecnologia deve servir às pessoas, e não o contrário. Nosso foco está sempre em criar experiências que conectam e facilitam a vida."}
-                </p>
+                
+                <div className="lg:w-2/3 bg-white/80 backdrop-blur-sm p-5 rounded-2xl shadow-sm">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 md:mb-4">{card.title}</h3>
+                  <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed mb-3 md:mb-4">
+                    {card.description}
+                  </p>
+                  <p className="text-sm sm:text-base md:text-lg leading-relaxed">
+                    Na Thinkless, acreditamos que {idx === 0 ? "a clareza de propósito é fundamental para entregarmos soluções que realmente fazem sentido para seu negócio." : idx === 1 ? "apenas o melhor é suficiente, por isso nos dedicamos a aprimorar constantemente nossas habilidades e processos." : "a tecnologia deve servir às pessoas, e não o contrário. Nosso foco está sempre em criar experiências que conectam e facilitam a vida."}
+                  </p>
+                </div>
               </div>
             </AnimatedCard>
           ))}

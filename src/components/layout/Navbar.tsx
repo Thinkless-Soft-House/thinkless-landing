@@ -53,6 +53,19 @@ const Navbar = () => {
     }
   };
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={cn(
@@ -111,7 +124,14 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden relative z-50 text-foreground p-1.5 rounded-md hover:bg-gray-100 transition-colors"
+          className={cn(
+            "md:hidden relative z-50 p-2 rounded-full transition-colors",
+            mobileMenuOpen 
+              ? "text-foreground bg-white shadow-md" 
+              : isScrolled 
+                ? "text-foreground hover:bg-white/80 hover:shadow-sm" 
+                : "text-foreground hover:bg-white/60 hover:shadow-sm"
+          )}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
@@ -122,28 +142,60 @@ const Navbar = () => {
           )}
         </button>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Redesigned */}
         <div
           className={cn(
-            "fixed inset-0 bg-white z-40 transition-transform duration-300 ease-in-out transform md:hidden",
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            "fixed inset-0 bg-white/95 backdrop-blur-sm z-40 transition-all duration-300 ease-in-out md:hidden",
+            mobileMenuOpen 
+              ? "opacity-100 translate-y-0" 
+              : "opacity-0 -translate-y-full pointer-events-none"
           )}
         >
-          <div className="flex flex-col items-center justify-center h-full space-y-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="flex items-center space-x-3 text-xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200 p-2"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavLinkClick(link.href);
-                }}
-              >
-                <span className="text-thinkless-blue">{link.icon}</span>
-                <span>{link.name}</span>
-              </a>
-            ))}
+          <div className="flex flex-col items-center justify-center min-h-screen p-6 pt-24">
+            <div className="w-full max-w-sm mx-auto bg-white rounded-2xl shadow-lg p-6 mb-8">
+              <div className="text-center mb-8">
+                <img 
+                  src="/lovable-uploads/c35fd64b-39d6-4a44-9f86-27f63a52854a.png" 
+                  alt="Thinkless Logo" 
+                  className="h-12 w-auto mx-auto mb-4"
+                />
+                <h3 className="text-lg font-medium text-gray-700">Navegue pelo site</h3>
+              </div>
+              
+              <div className="space-y-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className={cn(
+                      "flex items-center space-x-4 p-3 rounded-xl transition-all duration-200",
+                      activeLink === link.href
+                        ? "bg-blue-50 text-thinkless-blue font-medium"
+                        : "text-gray-700 hover:bg-gray-50"
+                    )}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavLinkClick(link.href);
+                    }}
+                  >
+                    <div className={cn(
+                      "flex items-center justify-center w-10 h-10 rounded-lg",
+                      activeLink === link.href
+                        ? "bg-thinkless-blue text-white"
+                        : "bg-gray-100 text-gray-500"
+                    )}>
+                      {link.icon}
+                    </div>
+                    <span className="text-base">{link.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+            
+            <div className="text-center text-sm text-gray-500">
+              <p>© {new Date().getFullYear()} Thinkless</p>
+              <p>Transformando ideias em soluções</p>
+            </div>
           </div>
         </div>
       </div>
