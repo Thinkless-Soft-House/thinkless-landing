@@ -12,10 +12,14 @@ interface AnimatedTextProps {
     | "fade-in-left"
     | "fade-in-right"
     | "scale"
-    | "blur-in";
+    | "blur-in"
+    | "slide-in"
+    | "bounce";
   delay?: number;
   triggerOnce?: boolean;
   threshold?: number;
+  duration?: number;
+  rootMargin?: string;
 }
 
 const AnimatedText = ({
@@ -25,6 +29,8 @@ const AnimatedText = ({
   delay = 0,
   triggerOnce = true,
   threshold = 0.1,
+  duration,
+  rootMargin = "0px 0px -100px 0px",
 }: AnimatedTextProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -43,7 +49,7 @@ const AnimatedText = ({
       },
       {
         threshold,
-        rootMargin: "0px 0px -100px 0px"
+        rootMargin
       }
     );
 
@@ -56,7 +62,7 @@ const AnimatedText = ({
         observer.unobserve(ref.current);
       }
     };
-  }, [triggerOnce, threshold]);
+  }, [triggerOnce, threshold, rootMargin]);
 
   return (
     <div
@@ -67,7 +73,8 @@ const AnimatedText = ({
       )}
       style={{
         animationDelay: `${delay}ms`,
-        animationFillMode: "forwards"
+        animationFillMode: "forwards",
+        animationDuration: duration ? `${duration}ms` : undefined
       }}
     >
       {children}

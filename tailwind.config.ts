@@ -133,6 +133,14 @@ export default {
 					'0%': { filter: 'blur(5px)', opacity: '0' },
 					'100%': { filter: 'blur(0)', opacity: '1' }
 				},
+				'slide-in': {
+					'0%': { transform: 'translateY(100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'bounce': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -146,6 +154,8 @@ export default {
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
 				'scale': 'scale 0.5s ease-out',
 				'blur-in': 'blur-in 0.6s ease-out',
+				'slide-in': 'slide-in 0.8s ease-out',
+				'bounce': 'bounce 2s ease-in-out infinite',
 			},
 			backdropBlur: {
 				xs: '2px',

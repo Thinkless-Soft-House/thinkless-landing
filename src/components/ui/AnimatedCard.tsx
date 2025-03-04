@@ -12,11 +12,17 @@ interface AnimatedCardProps {
     | "fade-in-left"
     | "fade-in-right"
     | "scale"
-    | "blur-in";
+    | "blur-in"
+    | "slide-in"
+    | "bounce";
   delay?: number;
   triggerOnce?: boolean;
   threshold?: number;
   hoverEffect?: boolean;
+  duration?: number;
+  rootMargin?: string;
+  parallax?: boolean;
+  parallaxSpeed?: number;
 }
 
 const AnimatedCard = ({
@@ -27,9 +33,28 @@ const AnimatedCard = ({
   triggerOnce = true,
   threshold = 0.1,
   hoverEffect = true,
+  duration,
+  rootMargin = "0px 0px -100px 0px",
+  parallax = false,
+  parallaxSpeed = 0.1,
 }: AnimatedCardProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollPos, setScrollPos] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+
+  // Handle scroll position for parallax effect
+  useEffect(() => {
+    if (!parallax) return;
+    
+    const handleScroll = () => {
+      setScrollPos(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [parallax]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,7 +70,7 @@ const AnimatedCard = ({
       },
       {
         threshold,
-        rootMargin: "0px 0px -100px 0px"
+        rootMargin
       }
     );
 
@@ -58,7 +83,12 @@ const AnimatedCard = ({
         observer.unobserve(ref.current);
       }
     };
-  }, [triggerOnce, threshold]);
+  }, [triggerOnce, threshold, rootMargin]);
+
+  const parallaxStyle = parallax ? {
+    transform: `translateY(${scrollPos * parallaxSpeed}px)`,
+    transition: 'transform 0.1s ease-out',
+  } : {};
 
   return (
     <div
@@ -72,7 +102,9 @@ const AnimatedCard = ({
       )}
       style={{
         animationDelay: `${delay}ms`,
-        animationFillMode: "forwards"
+        animationFillMode: "forwards",
+        animationDuration: duration ? `${duration}ms` : undefined,
+        ...parallaxStyle
       }}
     >
       {children}
