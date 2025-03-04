@@ -12,16 +12,28 @@ import FooterSection from "@/components/sections/FooterSection";
 
 const Index = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
       setScrollPosition(window.scrollY);
     };
 
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initialize on mount
+    window.addEventListener("resize", handleResize);
     
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Initialize on mount
+    handleScroll();
+    handleResize();
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (

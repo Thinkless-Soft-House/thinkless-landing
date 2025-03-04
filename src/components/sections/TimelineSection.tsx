@@ -9,35 +9,35 @@ const timelineSteps = [
   {
     title: "Coleta de Informações",
     description: "Entendemos o seu problema e coletamos todos os dados necessários para iniciar o processo de solução.",
-    icon: <MessageCircle className="h-8 w-8" />,
+    icon: <MessageCircle className="h-6 w-6 md:h-8 md:w-8" />,
     bgColor: "from-blue-500 to-purple-600",
     textColor: "text-blue-500"
   },
   {
     title: "Ideia Prototípica",
     description: "Desenvolvermos protótipos iniciais baseados nos dados coletados, buscando a melhor solução possível.",
-    icon: <MousePointer className="h-8 w-8" />,
+    icon: <MousePointer className="h-6 w-6 md:h-8 md:w-8" />,
     bgColor: "from-orange-400 to-pink-600",
     textColor: "text-orange-500"
   },
   {
     title: "Alinhamento",
     description: "Refinamos a ideia em conjunto com você, garantindo que estamos no caminho certo para resolver seu problema.",
-    icon: <Calendar className="h-8 w-8" />,
+    icon: <Calendar className="h-6 w-6 md:h-8 md:w-8" />,
     bgColor: "from-cyan-400 to-blue-500",
     textColor: "text-cyan-500"
   },
   {
     title: "Formulação Oficial",
     description: "Documentamos e estruturamos a solução final, preparando-a para o desenvolvimento.",
-    icon: <Navigation className="h-8 w-8" />,
+    icon: <Navigation className="h-6 w-6 md:h-8 md:w-8" />,
     bgColor: "from-emerald-400 to-teal-600",
     textColor: "text-emerald-500"
   },
   {
     title: "Desenvolvimento e Lançamento",
     description: "Transformamos a ideia em código, testamos exaustivamente e entregamos a solução pronta para uso.",
-    icon: <Video className="h-8 w-8" />,
+    icon: <Video className="h-6 w-6 md:h-8 md:w-8" />,
     bgColor: "from-purple-500 to-indigo-600",
     textColor: "text-purple-500"
   },
@@ -48,22 +48,60 @@ const TimelineSection = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="nossa-timeline" ref={timelineRef} className="min-h-screen py-24 bg-gradient-to-b from-white to-gray-50 relative">
+    <section id="nossa-timeline" ref={timelineRef} className="min-h-screen py-16 md:py-24 bg-gradient-to-b from-white to-gray-50 relative">
       <div className="absolute inset-0 z-0">
         <div className="absolute bottom-0 right-0 w-full h-96 bg-gradient-to-t from-purple-50 to-transparent opacity-50"></div>
         <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50 to-transparent opacity-50"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
-        <AnimatedText animation="fade-in" className="heading-md text-center mb-4 text-purple-600">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 relative z-10">
+        <AnimatedText animation="fade-in" className="heading-md text-center mb-3 md:mb-4 text-purple-600">
           Nossa Metodologia
         </AnimatedText>
         
-        <AnimatedText animation="fade-in-up" delay={300} className="heading-lg text-center max-w-3xl mx-auto mb-16">
+        <AnimatedText animation="fade-in-up" delay={300} className="heading-lg text-center max-w-3xl mx-auto mb-8 md:mb-16">
           Como transformamos problemas em soluções
         </AnimatedText>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        {/* Mobile Timeline View (Visible on Small Screens) */}
+        <div className="block lg:hidden mb-12">
+          <div className="space-y-8">
+            {timelineSteps.map((step, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                onClick={() => setHoverStep(index)}
+              >
+                <div className={`h-2 w-full bg-gradient-to-r ${step.bgColor}`}></div>
+                <div className="p-4 flex gap-4 items-start">
+                  <div className={cn(
+                    "w-12 h-12 rounded-lg flex items-center justify-center shrink-0",
+                    `bg-gradient-to-br ${step.bgColor} text-white`
+                  )}>
+                    {step.icon}
+                  </div>
+                  <div>
+                    <h3 className={cn("font-bold mb-1", step.textColor)}>{step.title}</h3>
+                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                  </div>
+                </div>
+                
+                {index === hoverStep && (
+                  <div className="px-4 pb-4 pt-1 text-sm bg-gray-50">
+                    {index === 0 && "Nossa primeira etapa é entender profundamente o seu negócio e os desafios que você enfrenta."}
+                    {index === 1 && "Criamos protótipos funcionais que permitem visualizar e testar as possíveis soluções."}
+                    {index === 2 && "Trabalhamos colaborativamente, ajustando a solução com base no seu feedback."}
+                    {index === 3 && "Estruturamos cada aspecto da solução, garantindo uma base sólida para o desenvolvimento."}
+                    {index === 4 && "Implementamos a solução final, garantindo que ela atenda perfeitamente às suas necessidades."}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Desktop Timeline View (Hidden on Small Screens) */}
+        <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left side - Timeline visualization */}
           <div className="order-2 lg:order-1">
             <div className="relative">

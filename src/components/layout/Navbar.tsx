@@ -58,23 +58,23 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4",
         isScrolled 
-          ? "bg-white/90 backdrop-blur-md shadow-sm py-3" 
+          ? "bg-white/90 backdrop-blur-md shadow-sm py-2" 
           : "bg-transparent"
       )}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 flex items-center justify-between">
         <a href="#hero" className="relative z-50">
           <div className="flex items-center space-x-2">
             <img 
               src="/lovable-uploads/c35fd64b-39d6-4a44-9f86-27f63a52854a.png" 
               alt="Thinkless Logo" 
-              className="h-10 w-auto"
+              className="h-8 sm:h-10 w-auto"
             />
           </div>
         </a>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-8">
+        <nav className="hidden md:flex space-x-6 lg:space-x-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
@@ -111,14 +111,14 @@ const Navbar = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden relative z-50 text-foreground p-2 rounded-md hover:bg-gray-100 transition-colors"
+          className="md:hidden relative z-50 text-foreground p-1.5 rounded-md hover:bg-gray-100 transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
         >
           {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
+            <X className="h-5 w-5" />
           ) : (
-            <Menu className="h-6 w-6" />
+            <Menu className="h-5 w-5" />
           )}
         </button>
 
@@ -129,12 +129,12 @@ const Navbar = () => {
             mobileMenuOpen ? "translate-x-0" : "translate-x-full"
           )}
         >
-          <div className="flex flex-col items-center justify-center h-full space-y-8">
+          <div className="flex flex-col items-center justify-center h-full space-y-6">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="flex items-center space-x-3 text-2xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200"
+                className="flex items-center space-x-3 text-xl font-medium text-foreground hover:text-thinkless-blue transition-colors duration-200 p-2"
                 onClick={(e) => {
                   e.preventDefault();
                   handleNavLinkClick(link.href);

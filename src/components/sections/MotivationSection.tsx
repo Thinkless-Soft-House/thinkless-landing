@@ -30,7 +30,7 @@ const MotivationSection = () => {
   ];
 
   return (
-    <section className="min-h-screen py-24 relative overflow-hidden">
+    <section className="min-h-screen py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-background to-transparent"></div>
         <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-background to-transparent"></div>
@@ -41,7 +41,7 @@ const MotivationSection = () => {
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-orange-500/5"></div>
       </div>
       
-      <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 relative z-10">
         <AnimatedText 
           animation="fade-in" 
           className="heading-md text-center mb-4 text-purple-600"
@@ -52,22 +52,22 @@ const MotivationSection = () => {
         <AnimatedText 
           animation="fade-in-up" 
           delay={300} 
-          className="heading-lg text-center max-w-3xl mx-auto mb-16"
+          className="heading-lg text-center max-w-3xl mx-auto mb-8 md:mb-16"
         >
           Nossa paixão por criar soluções que fazem a diferença
         </AnimatedText>
         
-        {/* Interactive Card Selector */}
-        <div className="flex justify-center mb-12">
-          <div className="flex space-x-2 p-1 bg-gray-100 rounded-full">
+        {/* Interactive Card Selector - Mobile Optimized */}
+        <div className="flex justify-center mb-8 md:mb-12 px-2">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-0 sm:flex-nowrap sm:space-x-2 p-1 bg-gray-100 rounded-full">
             {cards.map((card, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveCard(idx)}
                 className={cn(
-                  "px-6 py-2 rounded-full transition-all duration-300 font-medium",
+                  "px-3 sm:px-4 md:px-6 py-2 rounded-full transition-all duration-300 font-medium text-sm sm:text-base",
                   activeCard === idx 
-                    ? "text-white shadow-lg bg-thinkless-blue" 
+                    ? "bg-thinkless-blue text-white shadow-lg" 
                     : "text-gray-500 hover:bg-gray-200"
                 )}
               >
@@ -78,17 +78,17 @@ const MotivationSection = () => {
         </div>
         
         {/* Main animated card display */}
-        <div className="relative h-[400px] w-full max-w-4xl mx-auto">
+        <div className="relative h-[500px] sm:h-[450px] md:h-[400px] w-full max-w-4xl mx-auto">
           {cards.map((card, idx) => (
             <AnimatedCard
               key={idx}
               animation={activeCard === idx ? "fade-in-up" : "fade-in"}
               className={cn(
-                "absolute inset-0 transition-all duration-500 flex flex-col lg:flex-row items-center gap-8 p-8 rounded-2xl",
+                "absolute inset-0 transition-all duration-500 flex flex-col lg:flex-row items-center gap-4 md:gap-8 p-4 md:p-8 rounded-2xl",
                 activeCard === idx ? "opacity-100 z-10 transform-none" : "opacity-0 z-0 scale-95 pointer-events-none"
               )}
             >
-              <div className={`${card.color} p-8 rounded-2xl shadow-xl w-full lg:w-1/3 aspect-square flex items-center justify-center`}>
+              <div className={`${card.color} p-6 md:p-8 rounded-2xl shadow-xl w-full lg:w-1/3 aspect-square flex items-center justify-center`}>
                 <div className="relative w-full h-full">
                   <div className="absolute inset-0 rounded-xl bg-white/10 animate-pulse"></div>
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
@@ -103,11 +103,11 @@ const MotivationSection = () => {
               </div>
               
               <div className="lg:w-2/3">
-                <h3 className="text-3xl font-bold mb-6">{card.title}</h3>
-                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-6">{card.title}</h3>
+                <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4 md:mb-6">
                   {card.description}
                 </p>
-                <p className="text-lg leading-relaxed">
+                <p className="text-base md:text-lg leading-relaxed">
                   Na Thinkless, acreditamos que {idx === 0 ? "a clareza de propósito é fundamental para entregarmos soluções que realmente fazem sentido para seu negócio." : idx === 1 ? "apenas o melhor é suficiente, por isso nos dedicamos a aprimorar constantemente nossas habilidades e processos." : "a tecnologia deve servir às pessoas, e não o contrário. Nosso foco está sempre em criar experiências que conectam e facilitam a vida."}
                 </p>
               </div>
